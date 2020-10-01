@@ -3,6 +3,8 @@ from .models import Comment, Wishlist
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django import forms
+from .forms import SignUpForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -11,6 +13,7 @@ import requests, xmltodict, json
 # from decouple import config
 import os
 from django.core.paginator import Paginator
+
 
 
 ######################### Index #########################

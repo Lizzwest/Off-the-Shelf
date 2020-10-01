@@ -1,17 +1,18 @@
 {% extends 'base.html' %} 
 
-{% load crispy_forms_tags %}
-{% crispy form form.helper %}
+<!-- {% load crispy_forms_tags %}
+{% crispy form form.helper %} -->
 
 {% block content %}
 
   <div class="container text-center" id="signup" >
     <h3 class="title">Sign Up</h3>
-      <form method="POST" action=".">
-        {% crispy form %}
+      <form action="" method="POST">
         {% csrf_token %} 
+        <!-- {{ form|crispy }}         -->
+        {{ form.as_p }}
         <div class="text-center">
-          <button id="sign-up-button"type="submit" value="submit"><img class="shelf-icon"src="/static/assets/icons8-add-user-male-50.png" alt="add a user">Sign Up!</button>
+          <button id="sign-up-button"type="submit"><img class="shelf-icon"src="/static/assets/icons8-add-user-male-50.png" alt="add a user">Sign Up!</button>
         </div>
       </form>
 
@@ -26,4 +27,3 @@
       </div>
   </div>
 {% endblock %}
-
