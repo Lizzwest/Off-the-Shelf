@@ -55,7 +55,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = ['offtheshelff.herokuapp.com']
+ALLOWED_HOSTS = ['offtheshelff.herokuapp.com',]
 
 
 # Application definition
