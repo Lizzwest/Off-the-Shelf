@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+
+  <h1>{{ username }}'s Wishlist </h1>
+  {% if wishlists %}
+    {% for i in wishlists %}
+      <a id="title-link" href="/book_show/{{ i.book_id }}"><h4>{{ i.title }}</h4></a>
+      <img src="{{ i.img_url }}" alt="img">
+      <form action="" method="POST">
+        {% csrf_token %}   
+        <input hidden type="text" name="delete" value="{{i.book_id}}">
+        <button type="submit">Delete from Wishlist</button>
+      </form>
+    {% endfor %}
+  {% else %}
+    <h5>You have no wishlist yet.</h5>
+  {% endif %}
+
+  <h2>{{ username }}'s Comments</h2>
+  {% if comments %}
+    {% for i in comments %}
+      <a href="/book_show/{{i.book_id}}"><h4>Title:{{i.title}}</h4></a>
+      <h4>{{i.content}}</h4>
+      <a href="{% url 'comments_update' i.id  %}">Update</a>
+      <form action="" method="POST">
+        {% csrf_token %}
+        <input hidden type="text" name="delete_comment" value={{i.id}}>
+        <button type="submit">Delete</button>
+      </form>
+    {% endfor %}
+  {% else %}
+    <h5>You have no comments yet.</h5>
+  {% endif %}
+
+  <div class="list-group">
+    <div class="list-group-item">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">List group item heading</h5>
+        <small>3 days ago</small>
+      </div>
+      <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+      <small>Donec id elit non mi porta.</small>
+    </div>
+  </div>
+  
+{% endblock %}

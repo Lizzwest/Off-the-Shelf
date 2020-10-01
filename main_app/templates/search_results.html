@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{%block content%}
+<!-- <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+
+            <a href="?page={{page_obj.previous_page_number}}">Previous</a>
+        {% endif %}
+        {% if page_obj.has_next %}
+            <a href="?page={{page_obj.next_page_number}}">Next</a>
+
+        {% endif %}
+    </span>
+    </div> -->
+    {% for book in booklist %}
+        <a id="title-link" class="title-link" href="/book_show/{{ book.id }}">
+        <h1 id="title-link" class="title-link"> {{ book.title }} </h1>
+        </a>
+        <h2>{{ book.author }}</h2>
+        <h3>{{ book.average_rating }}</h3>
+    <img src= "{{ book.img_url }}" alt="img">
+    <br />
+    <br />
+    <br />
+    <br />
+    
+    {% endfor %}
+    
+
+{% endblock %}

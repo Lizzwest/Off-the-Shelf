@@ -1,0 +1,90 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Off The Shelf</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=David+Libre:wght@700&display=swap');
+      </style>
+      <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+        </style>
+  </head>
+  <body>
+    
+    <header>
+      <nav class="navbar navbar-expand-sm navbar-collapse">
+        
+        <a class="navbar-brand" href="/"><img class="shelf-icon"src="/static/assets/icons8-books-50.png" alt="offtheshelf">Home</a>
+        <button class="navbar-toggler navbar-light" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">            
+          <div class="navbar-nav">
+            {% if user.is_authenticated %}
+            <a class="nav-link active" href="{% url 'profile' user.username %}"><img class="shelf-icon"src="/static/assets/icons8-wish-list-50.png" alt="Wishlist">Wishlist<span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="{% url 'logout' %}"><img class="shelf-icon"src="/static/assets/icons8-exit-50.png" alt="logout">Logout</a>
+            
+            {% else %}
+            <a class="nav-link mr-auto" href="/signup"><img class="shelf-icon"src="/static/assets/icons8-add-user-male-50.png" alt="add a user">Sign Up</a>
+            <a class="nav-link mr-auto" href="/login"><img class="shelf-icon"src="/static/assets/icons8-signin-50.png" alt="log in"> Log In</a>
+            {% endif %}            
+          </div>
+              
+          
+            <h1 class="navbar-nav navbar-center">OFF THE SHELF</h1>
+          <div class="nav navbar-nav ">
+            <img id="audio-button" class="ml-auto" src="/static/assets/icons8-circled-play-50.png" alt="play/pause">Play/Pause  <audio  volume="0.1" loop src="/static/assets/melancholy.mp3" id="myaudio"></audio>
+              <div class="container text-center" id="background">
+                <audio >
+                  <source src="/static/assets/melancholy.mp3" type="audio/mp3">
+                Your browser does not support the audio element.
+            </div>
+            <script>
+              var audio = document.getElementById("myaudio");
+              var button = document.getElementById('audio-button')
+              
+              audio.volume = 0.4;
+              
+              button.addEventListener('click', function(){
+                
+                if(audio.paused){
+                  audio.play()
+                
+                }
+                else{
+                  audio.pause()
+                }
+              })
+
+            </script>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="content">
+    <div class="opaque">
+    <!-- <h1 id="index-head">Off The Shelf</h1> -->
+
+    
+
+
+    {%block content%}
+
+    {% endblock %}
+    
+</div>
+<div class="footer">
+  <p class="footer-names">Margaret Huang <a href="https://github.com/margaret-jihua"> <img src="/static/assets/icons8-github.svg" alt="github"></a><a href="https://www.linkedin.com/in/margaret-jihua/"> <img src="/static/assets/icons8-linkedin.svg" alt="linkedin"></a> </p> <p class="footer-names"> Steven Michaud <a href="https://github.com/Michaudsr"> <img src="/static/assets/icons8-github.svg" alt="github"></a><a href="https://www.linkedin.com/in/steven-michaud/"> <img src="/static/assets/icons8-linkedin.svg" alt="linkedin"></a></p> <p class="footer-names"> Nicholas Phillips <a href="https://github.com/maestronick1"> <img src="/static/assets/icons8-github.svg" alt="github"></a><a href="https://www.linkedin.com/in/nick-phillips-23a796137/"> <img src="/static/assets/icons8-linkedin.svg" alt="linkedin"></a></p>  <p class="footer-names">Lizz West <a href="https://github.com/Lizzwest"> <img src="/static/assets/icons8-github.svg" alt="github"></a><a href="https://www.linkedin.com/in/lizzwest/"> <img src="/static/assets/icons8-linkedin.svg" alt="linkedin"></a> </p>
+</div>
+
+    <!-- <footer>All Rights Reserved, Off The SHelf 2020</footer> -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  </body>
+</html>

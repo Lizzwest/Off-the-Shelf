@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{%block content%}
+        
+    <img src="../static/assets/bookworm.gif" alt="bookworm" style="width: 150px; height: 150px;">
+    <h3>Welcome to Off The Shelf, your one stop spot for all things books!
+        Search by title or by author in the search bar below. You can also find
+        similar books, reviews about the books and even a link to purchase. So get started... 
+        your next great adventure is only one page away.
+    </h3><br />
+    <div class="search">
+        <form action="/search_results/" method="POST">
+            {% csrf_token %}
+                <label for="search"><h3>Search:</h3></label>
+                <input class="input-search" type="text" name="search">
+                <button type="submit"><img src="../static/assets/icons8-google-web-search-50 (1).png" alt="img"></button>
+        </form>
+    </div>
+    
+{% endblock %}

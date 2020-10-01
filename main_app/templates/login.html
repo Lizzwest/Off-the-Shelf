@@ -1,0 +1,9 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div class="container login">
+  <h1 class="title">Login</h1>
+  <form class="login-form" method="POST" action=".">
+    {% csrf_token %} {{ form.as_p }}
+    <button id="login-button"type="submit"><img class="shelf-icon"src="/static/assets/icons8-signin-50.png" alt="log in">Log In!</button>
+  </form>
+</div>
+{% endblock %}

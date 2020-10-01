@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{%block content%}
+<h1>{{ detail.title }}</h1>
+<h2>Author: <a class="author-link" href="{{ detail.author_link }}">{{ detail.author }}</a></h2>
+<h3>avg rating: {{detail.average_rating}}</h3>
+<img src={{detail.img_url}} alt="img">
+
+<form action="/user/{{user.username}}/" method="POST">
+    {% csrf_token %}
+    <input hidden type="text" value="{{ detail.title }}" name="title">
+    <input hidden type="text" value="{{ detail.img_url }}" name="image">
+    <input type="hidden" value={{ detail.id }} name="id">
+    <button type="submit"><img class="shelf-icon"src="/static/assets/icons8-wish-list-50.png" alt="Wishlist">Add to Wishlist!</button>
+</form>
+
+<p class="book-description">{{ detail.description }}</p>
+
+<h4><img class="shelf-icon"src="/static/assets/icons8-return-purchase-52.png" alt="Wishlist">  Buy links:
+
+    <a class="buy-link" href="https://www.barnesandnoble.com/s/{{ detail.title }}/_/N-w">Barnes and Noble</a>
+    <span> | </span>
+    <a class="buy-link"href="https://www.amazon.com/s?k={{ detail.isbn }}&i=stripbooks&ref=nb_sb_noss">Amazon</a>
+    <span> | </span>
+    <a class="buy-link"href="https://www.amazon.com/s?k={{ detail.isbn }}&i=digital-text&ref=nb_sb_noss">Kindle</a></h4>
+
+
+<div class="buy_link">    
+    <h2><img class="shelf-icon"src="/static/assets/icons8-movie-projector-50.png" alt="Wishlist">Movie based on this book:</h2>
+    {% if movie.title %}
+        <h3>{{movie.title}} ({{movie.year}})</h3>
+        <h3>Director: {{movie.director}} | IMDB Rating: {{movie.imdbRating}}</h3>
+        <p>Plot: {{movie.plot}}</p>
+        <img src="{{ movie.poster }}" alt="poster">
+    {% else %}
+        <h3>{{ movie.None }}</h3>
+    {% endif %}
+</div>
+
+<div class="comments">
+    <h3>Comments: </h3>
+    {% for comment in comments %}
+        <h5 class="comment-content">{{ comment.user.username }}</h5>
+        <h5 class="comment-content">{{ comment.content }}</h5>
+    {% endfor %}
+    <form action="/book_show/{{ detail.id }}/" method="POST">
+        {% csrf_token %}
+        <label for="content">Add a comment:</label>
+        <input id="id_password" type="text" name="content">
+        <input type="hidden" name="id" value={{ detail.id }}>
+        <input type="hidden" name="title" value="{{ detail.title }}">
+        <button type="submit">Submit Comment!</button>
+    </form>
+</div>
+
+
+<h3>Similar Books:</h3>
+<div class="sim-grid">
+    {% for i in similar %}
+        {% if i.title %}
+            <div class="card">
+                <a href="/book_show/{{ i.id }}"><h1 class="sim-book-title">{{ i.title }}</h1></a>
+                <img class="book-image"src="/static/assets/icons8-book-75.png" alt="img">
+            </div>
+        {% else %}
+            <p>{{ i.None }}</p>
+        {% endif %}
+    {% endfor %}
+</div>
+
+<style>
+    #goodreads-widget {
+    font-family: georgia, serif;
+    padding: 18px 0;
+    width:565px;
+    margin: auto;
+    border: 10px solid black;
+    }
+    #goodreads-widget h1 {
+    font-weight:normal;
+    font-size: 22px;
+    border-bottom: 1px solid #e8d0a9;
+    margin-bottom: 0;
+    }
+    #goodreads-widget a {
+    text-decoration: none;
+    color:#e8d0a9;
+    }
+    iframe{
+    background-color: #fff;
+    }
+    #goodreads-widget a:hover { text-decoration: underline; }
+    #goodreads-widget a:active {
+    color:#660;
+    }
+    #gr_footer {
+    width: 100%;
+    border-top: 1px solid #e8d0a9;
+    text-align: right;
+    }
+    #goodreads-widget .gr_branding{
+    color: #e8d0a9;
+    font-size: 11px;
+    text-decoration: none;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+    </style>
+    <div id="goodreads-widget">
+        <div id="gr_header">
+          <h1>
+            <a rel="nofollow" href="https://www.goodreads.com/book/show/{{ detail.id }}">
+              Goodreads reviews for {{ detail.title }}
+            </a>
+          </h1>
+        </div>
+        <iframe id="the_iframe" src="https://www.goodreads.com/api/reviews_widget_iframe?did={{ did }}&format=html&header_text=Goodreads+reviews+for+{{ detail.title }}&isbn={{ detail.isbn }}&links=660&review_back=fff&stars=000&text=000" width="565" height="400" frameborder="0"></iframe>
+        <div id="gr_footer">
+          <a class="gr_branding" target="_blank" rel="nofollow noopener noreferrer" href="https://www.goodreads.com/book/show/{{ detail.id }}?utm_medium=api&utm_source=reviews_widget">Reviews from Goodreads.com</a>
+        </div>
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %} 
+
+{% load crispy_forms_tags %}
+{% crispy form form.helper %}
+
+{% block content %}
+
+  <div class="container text-center" id="signup" >
+    <h3 class="title">Sign Up</h3>
+      <form method="POST">
+        {% crispy form %}
+        {% csrf_token %} 
+        <div class="text-center">
+          <button id="sign-up-button"type="submit"><img class="shelf-icon"src="/static/assets/icons8-add-user-male-50.png" alt="add a user">Sign Up!</button>
+        </div>
+      </form>
+
+      <div>
+        <br />
+        <br />
+        <h2 class="signup-text">
+         Welcome to Off the Shelf! 
+        </h2>
+        <br />
+        <br />
+      </div>
+  </div>
+{% endblock %}
+
