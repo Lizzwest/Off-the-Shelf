@@ -10,7 +10,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 import requests, xmltodict, json
-# from decouple import config
+from decouple import config
 import os
 from django.core.paginator import Paginator
 
@@ -101,7 +101,7 @@ def search_results(request):
     if request.method == 'POST':
         search = request.POST.get("search")
 
-        response = requests.get('https://www.goodreads.com/search.xml?key={}&q={}'.format(os.environ('key'), search))
+        response = requests.get('https://www.goodreads.com/search.xml?key={}&q={}'.format(config('key'), search))
     
         data = xmltodict.parse(response.content)
         jsonData = json.dumps(data)
@@ -151,7 +151,7 @@ def book_show(request, id):
     # get existing comments about this book from our database
     comments = Comment.objects.filter(book_id=id)
     # get book details from goodreads api
-    response = requests.get('https://www.goodreads.com/book/show/{}.xml?key={}'.format(id, os.environ('key')))
+    response = requests.get('https://www.goodreads.com/book/show/{}.xml?key={}'.format(id, config('key')))
     data = xmltodict.parse(response.content)
     jsonData = json.dumps(data)
     theData = json.loads(jsonData)
@@ -206,7 +206,7 @@ def book_show(request, id):
 
     # search movie from omdb api by this book title
     title = clean_title(detail["title"])
-    omdb_response = requests.get('http://www.omdbapi.com/?t={}&apikey={}'.format(title, os.environ('omdb_key')))
+    omdb_response = requests.get('http://www.omdbapi.com/?t={}&apikey={}'.format(title, config('omdb_key')))
     movie_data = json.loads(omdb_response.content)
     # check if the writer of the movie is the same of the book author 
     if "Title" in movie_data:
@@ -255,7 +255,7 @@ def book_show(request, id):
         "similar": similar,
         "buyLinks": buyLinks,
         "comments":comments,
-        "did": os.environ('key'),
+        "did": config('key'),
         "movie": movie
     })
     
