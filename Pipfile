@@ -14,6 +14,8 @@ dj-database-url = "*"
 psycopg2 = "*"
 whitenoise = "*"
 django-crispy-forms ="*"
+requests ="*"
+xmltodict = "*"
 
 [requires]
 python_version = "3.8"
