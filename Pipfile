@@ -17,5 +17,6 @@ django-crispy-forms ="*"
 requests ="*"
 xmltodict = "*"
 
+
 [requires]
 python_version = "3.8"
