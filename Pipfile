@@ -13,8 +13,8 @@ django-cors-headers = "*"
 dj-database-url = "*"
 psycopg2 = "*"
 whitenoise = "*"
-django-crispy-forms ="*"
-requests ="*"
+django-crispy-forms = "*"
+requests = "*"
 xmltodict = "*"
 
 

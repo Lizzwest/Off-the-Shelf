@@ -1,2 +1,2 @@
-web : gunicorn offtheshelf.wsgi
+web: gunicorn offtheshelf.wsgi
 release: python manage.py migrate
