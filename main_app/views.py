@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-import xmltodict, json, dotenv
+import requests, xmltodict, json, dotenv
 from decouple import config
 import os
 from django.core.paginator import Paginator
