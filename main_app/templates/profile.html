@@ -19,9 +19,9 @@
   <h2>{{ username }}'s Comments</h2>
   {% if comments %}
     {% for i in comments %}
-      <a class="title-link"href="/book_show/{{i.book_id}}"><h4>Title:{{i.title}}</h4></a>
+      <a class="title-link-on-profile"href="/book_show/{{i.book_id}}"><h4>Title:{{i.title}}</h4></a>
       <h4>{{i.content}}</h4>
-      <a class= "buy-link" href="{% url 'comments_update' i.id  %}">Update</a>
+      <a class= "update-link" href="{% url 'comments_update' i.id  %}">Update</a>
       <form action="" method="POST">
         {% csrf_token %}
         <input hidden type="text" name="delete_comment" value={{i.id}}>

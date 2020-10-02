@@ -233,6 +233,22 @@ audio {
       color:#e8d0a9;
       
   }
+  .title-link-on-profile{
+    font-size: 1.2rem;
+    color:#e8d0a9;
+  }
+  .update-link{
+    font-size: 1rem;
+    color:#e8d0a9;
+  }
+  .title-link-on-profile:hover{
+    
+    color:#b3d38a;
+  }
+  .update-link:hover{
+    
+    color:#b3d38a;
+  }
   .buy-link:hover{
     color:#b3d38a;
     
