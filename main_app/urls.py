@@ -2,7 +2,7 @@ from django.urls import path
 from . import views
 from django.conf.urls import handler404, handler500
 
-handler404 = 'main_app.views.handler404'
+handler404 = views.handler404
 
 urlpatterns = [
     path('', views.index, name='index'),
