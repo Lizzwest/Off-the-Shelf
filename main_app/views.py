@@ -10,7 +10,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 import requests, xmltodict, json
-from decouple import config
+# from decouple import config
 import os
 from django.core.paginator import Paginator
 
