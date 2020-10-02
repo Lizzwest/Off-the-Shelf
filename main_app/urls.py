@@ -1,5 +1,8 @@
 from django.urls import path
 from . import views
+from django.conf.urls import handler404, handler500
+
+handler404 = 'views.handler404'
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -10,7 +13,7 @@ urlpatterns = [
     path('user/<username>/', views.profile, name='profile'),
     path('book_show/<int:id>/', views.book_show, name="book_show"),
     path('comments/<int:pk>/update/', views.CommentUpdate.as_view(), name="comments_update"),
-    path('*',views.handler404),
+    # path('*',views.handler404),
     # path('comment/create/<int:book_id>', views.CommentCreate.as_view(), name='comment_create'),
     # path('user/<username>/delete/', views.CatDelete.as_view(), name='cats_delete'),
 ]
