@@ -10,7 +10,7 @@ urlpatterns = [
     path('user/<username>/', views.profile, name='profile'),
     path('book_show/<int:id>/', views.book_show, name="book_show"),
     path('comments/<int:pk>/update/', views.CommentUpdate.as_view(), name="comments_update"),
-    path('handler404',views.handler404),
+    path('*',views.handler404),
     # path('comment/create/<int:book_id>', views.CommentCreate.as_view(), name='comment_create'),
     # path('user/<username>/delete/', views.CatDelete.as_view(), name='cats_delete'),
 ]
