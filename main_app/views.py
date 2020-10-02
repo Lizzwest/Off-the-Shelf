@@ -119,15 +119,24 @@ def search_results(request):
             num_results = len(searchList)
             if num_results > 10: 
                 num_results = 10
+
+            # check the rating
+            if type(searchList[0]["average_rating"]) is dict:
+                rating = 'No rating yet'
+            else:
+                rating = searchList[0]["average_rating"]
+
+            # append search result to booklist
             for i in range(num_results):
                 book = {
                     "title": searchList[i]["best_book"]["title"],
                     "author": searchList[i]["best_book"]["author"]["name"],
                     "img_url": searchList[i]["best_book"]["image_url"],
-                    "average_rating": searchList[i]["average_rating"],
+                    "average_rating": rating,
                     "id": searchList[i]["best_book"]["id"]['#text'],
                 }
                 booklist.append(book)
+
         else:
             booklist = [{"None": "No search result found. Please check your spelling."}]
 

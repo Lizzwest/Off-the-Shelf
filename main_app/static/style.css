@@ -64,6 +64,7 @@ button:hover{
 .fourofour{
     background: url("https://giphy.com/gifs/reading-dot-strategies-NFA61GS9qKZ68");
     width:50vw;
+    margin: auto;
 }
 input{
     border: 2px
