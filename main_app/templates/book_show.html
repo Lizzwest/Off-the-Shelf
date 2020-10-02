@@ -39,8 +39,9 @@
 <div class="comments">
     <h3>Comments: </h3>
     {% for comment in comments %}
-        <h5 class="comment-content">{{ comment.user.username }}</h5>
-        <h5 class="comment-content">{{ comment.content }}</h5>
+    <h5 class="comment-content">
+        {{ comment.user.username }}: {{ comment.content }}
+    </h5>
     {% endfor %}
     <form action="/book_show/{{ detail.id }}/" method="POST">
         {% csrf_token %}

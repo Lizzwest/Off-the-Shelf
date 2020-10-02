@@ -105,6 +105,14 @@ audio {
     height: 50vw;
     width:50vw;
 } */
+.comments{
+    border: 5px solid #b7afa3;
+    border-radius: 10%;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    margin: auto;
+    width: 50vw;
+}
 
 .search{
     background: none
