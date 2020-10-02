@@ -34,7 +34,7 @@ if DJANGO_HOST == "production":
     DEBUG = False
     STATIC_URL = 'https://offtheshelff.herokuapp.com/'
 else:
-    DEBUG = False
+    DEBUG = True
     STATIC_URL = '/static/'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
