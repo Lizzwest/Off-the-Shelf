@@ -1,12 +1,16 @@
 {% extends 'book_show.html' %} 
 {% block content %}
-<div class="container">
-  <form class="text-center" action="" method="post">
+
+<div style="margin-left: 25vw;">
+  <form  action="" method="post">
+    <div class="form-inline">
       {% csrf_token %}
       <table>
         {{ form.as_table }}
       </table>
-      <input class="btn btn-primary" type="submit" value="Submit!" />
-    </form>
+      <button class="form-item" type="submit">Submit</button>
+    </div>
+  </form>
 </div>
-  {% endblock %}
+
+{% endblock %}
