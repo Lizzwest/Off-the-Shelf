@@ -56,7 +56,7 @@ We also installed add on's for heroku to deploy online.
 | Column Name | Data Type | Notes |
 | --------------- | ------------- | ------------------------------ |
 | id | Integer | Serial Primary Key, Auto-generated |
-| content |  | Must be provided |
+| content | CharField | Must be provided |
 | book_id | CharField | Provided by API|
 | title | CharField | Provided by API |
 | user | ForeignKey | Auto-generated from User Model|
@@ -95,10 +95,9 @@ We also installed add on's for heroku to deploy online.
     - The big struggle with the API also ended up being my victory, so I will address it below.
 - Nick
     - My struggle was also my victory, which was implementing the audio file. It was hard because we wanted it to auto loop, but we also didn't want the audio controls displaying standard.
+
 - Lizz
     - It was difficult to get all HTML's rendering properly, especially with django's built in debug feature. Took about 2 days of going back and forth to finally get everything rendering as intended.
-
-
 
 ### The Victories
 
@@ -110,6 +109,65 @@ We also installed add on's for heroku to deploy online.
     - Finally getting the audio track working and having it play at the user's request. It is also an original audio track I composed and mastered for this project.
 - Lizz
     - My biggest victory was the styling all coming together and learning how to customize icons for a site, giving it a more user-friendly feel.
+
+
+### Code Snippets
+```base.html``` audio file
+```html
+<img id="audio-button" class="" src="/static/assets/icons8-circled-play-50.png" alt="play/pause">Play/Pause  <audio  volume="0.1" loop src="/static/assets/melancholy.mp3" id="myaudio"></audio>
+              <div class="container text-center" id="background">
+                <!-- <audio >
+                  <source src="/static/assets/melancholy.mp3" type="audio/mp3">
+                Your browser does not support the audio element. -->
+            </div>
+            <script>
+              var audio = document.getElementById("myaudio");
+              var button = document.getElementById('audio-button')
+              audio.volume = 0.4;
+              button.addEventListener('click', function(){
+                if(audio.paused){
+                  audio.play()
+                }
+                else{
+                  audio.pause()
+                }
+              })
+```
+```views.py``` profile
+```python
+@login_required
+def profile(request, username):
+    if request.method == "POST":
+        delete_comment = request.POST.get("delete_comment")
+        if delete_comment:
+            Comment.objects.filter(id=delete_comment).delete()
+        else:
+            delete = request.POST.get("delete")
+            if delete:
+                user = request.user
+                Wishlist.objects.filter(user=user, book_id=delete).delete()
+            else:
+                title = request.POST.get("title")
+                id = request.POST.get("id")
+                img_url = request.POST.get("image")
+                user = request.user 
+
+                exist = Wishlist.objects.filter(user=user, book_id=id)
+                if exist:
+                    pass
+                else:
+                    Wishlist.objects.create(
+                        title = title,
+                        book_id = id,
+                        img_url = img_url,
+                        user = user
+                    )
+    user = User.objects.get(username=username)
+    wishlists = Wishlist.objects.filter(user=user)
+    comments = Comment.objects.filter(user=user)
+    return render(request, 'profile.html', {'username': username, 'wishlists': wishlists, "comments": comments})
+
+```
 
 ### What comes next
 
