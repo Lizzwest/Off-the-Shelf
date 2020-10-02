@@ -34,9 +34,10 @@ def login_view(request):
                 if user.is_active:
                     login(request, user)
                     return HttpResponseRedirect('/user/'+str(user))
-                else:print('The account has been disable YOU SCOUNDREL')
+                else:
+                    return HttpResponse('The account has been disable YOU SCOUNDREL')
         else:
-            print('The username and/or password is incorrect. You are less of a scoundrel')
+            return HttpResponse('The username and/or password is incorrect. You are less of a scoundrel')
     else:
         form = AuthenticationForm()
         return render(request, 'login.html', {'form':form})
@@ -102,36 +103,35 @@ def search_results(request):
     if request.method == 'POST':
         search = request.POST.get("search")
 
-        response = requests.get('https://www.goodreads.com/search.xml?key={}&q={}'.format(os.environ['key'], search))
-    
+        response = requests.get('https://www.goodreads.com/search.xml?key=%7B%7D&q=%7B%7D%27.format(config(%27key%27), search))
+
         data = xmltodict.parse(response.content)
         jsonData = json.dumps(data)
         theData = json.loads(jsonData)
-        searchList = theData["GoodreadsResponse"]["search"]["results"]["work"]
 
         booklist = []
-        # check number of search results, if more than 10 return first 10
-        num_results = len(searchList)
-        if num_results > 10: 
-            num_results = 10
+        results = theData["GoodreadsResponse"]["search"]["results"]
 
-        for i in range(num_results):
-            book = {
-                "title": searchList[i]["best_book"]["title"],
-                "author": searchList[i]["best_book"]["author"]["name"],
-                "img_url": searchList[i]["best_book"]["image_url"],
-                "average_rating": searchList[i]["average_rating"],
-                "id": searchList[i]["best_book"]["id"]['#text'],
-            }
-    
-            booklist.append(book)
-        # return(booklist)
-    # paginator = Paginator(booklist, 2)
-    # page_number = request.GET.get("page")
-    # page_obj = paginator.get_page(page_number)
+        if results != None:
+            searchList = results["work"]
+            # check number of search results, if more than 10 return first 10
+            num_results = len(searchList)
+            if num_results > 10: 
+                num_results = 10
+            for i in range(num_results):
+                book = {
+                    "title": searchList[i]["best_book"]["title"],
+                    "author": searchList[i]["best_book"]["author"]["name"],
+                    "img_url": searchList[i]["best_book"]["image_url"],
+                    "average_rating": searchList[i]["average_rating"],
+                    "id": searchList[i]["best_book"]["id"]['#text'],
+                }
+                booklist.append(book)
+        else:
+            booklist = [{"None": "No search result found. Please check your spelling."}]
 
     return render(request, 'search_results.html', {"booklist": booklist} )
-
+    
 ######################### Book Show #########################
 
 def book_show(request, id):
