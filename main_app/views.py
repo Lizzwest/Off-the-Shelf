@@ -73,14 +73,15 @@ def profile(request, username):
         else:
             delete = request.POST.get("delete")
             if delete:
-                Wishlist.objects.filter(book_id=delete).delete()
+                user = request.user
+                Wishlist.objects.filter(user=user, book_id=delete).delete()
             else:
                 title = request.POST.get("title")
                 id = request.POST.get("id")
                 img_url = request.POST.get("image")
                 user = request.user 
 
-                exist = Wishlist.objects.filter(book_id=id)
+                exist = Wishlist.objects.filter(user=user, book_id=id)
                 if exist:
                     pass
                 else:

@@ -30,7 +30,7 @@
         <h3>{{movie.title}} ({{movie.year}})</h3>
         <h3>Director: {{movie.director}} | IMDB Rating: {{movie.imdbRating}}</h3>
         <p>Plot: {{movie.plot}}</p>
-        <img src="{{ movie.poster }}" alt="poster">
+        <img class="movie-img" src="{{ movie.poster }}" alt="poster">
     {% else %}
         <h3>{{ movie.None }}</h3>
     {% endif %}
@@ -73,7 +73,6 @@
     padding: 18px 0;
     width:565px;
     margin: auto;
-    border: 10px solid black;
     }
     #goodreads-widget h1 {
     font-weight:normal;

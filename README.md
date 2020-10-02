@@ -73,11 +73,11 @@ We also installed add on's for heroku to deploy online.
 
 
 ## Wireframes/ERD
-![erd](offtheshelf/main_app/static/assets/erd.png)
-![wireframe](offtheshelf/main_app/static/assets/wireframe1.png)
-![wireframe](offtheshelf/main_app/static/assets/wireframe2.png)
-![wireframe](offtheshelf/main_app/static/assets/wireframe3.png)
-![wireframe](offtheshelf/main_app/static/assets/wireframe4.png)
+![erd](main_app/static/assets/erd.png)
+![wireframe](main_app/static/assets/wireframe1.png)
+![wireframe](main_app/static/assets/wireframe2.png)
+![wireframe](main_app/static/assets/wireframe3.png)
+![wireframe](main_app/static/assets/wireframe4.png)
 
 ## The Dev Team
 
