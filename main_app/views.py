@@ -103,7 +103,8 @@ def search_results(request):
     if request.method == 'POST':
         search = request.POST.get("search")
 
-        response = requests.get('https://www.goodreads.com/search.xml?key=%7B%7D&q=%7B%7D%27.format(config(%27key%27), search)
+        response = requests.get('https://www.goodreads.com/search.xml?key={}&q={}'.format(os.environ['key'], search))
+
 
         data = xmltodict.parse(response.content)
         jsonData = json.dumps(data)
