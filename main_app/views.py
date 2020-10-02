@@ -103,7 +103,7 @@ def search_results(request):
     if request.method == 'POST':
         search = request.POST.get("search")
 
-        response = requests.get('https://www.goodreads.com/search.xml?key=%7B%7D&q=%7B%7D%27.format(config(%27key%27), search))
+        response = requests.get('https://www.goodreads.com/search.xml?key=%7B%7D&q=%7B%7D%27.format(config(%27key%27), search)
 
         data = xmltodict.parse(response.content)
         jsonData = json.dumps(data)
@@ -131,7 +131,7 @@ def search_results(request):
             booklist = [{"None": "No search result found. Please check your spelling."}]
 
     return render(request, 'search_results.html', {"booklist": booklist} )
-    
+
 ######################### Book Show #########################
 
 def book_show(request, id):
